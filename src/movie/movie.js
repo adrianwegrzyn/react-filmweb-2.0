@@ -41,15 +41,21 @@ class Movie extends Component {
 
     saveMovie = (id) => {
         let data = localStorage.getItem('cart');
+        let isIn = false;
         if(data === null){
             localStorage.setItem('cart', id);
         }else {
-            localStorage.setItem('cart', data + ' ' + id);
+            let array = localStorage.getItem("cart").split(" ");
+            array.forEach(number => {
+                if(number === id){
+                    isIn =  true;
+                }
+            });
+            if(!isIn){
+                localStorage.setItem('cart', data + ' ' + id);
+            }
+            isIn = false;
         }
-
-
-        let dataJson = JSON.stringify(localStorage.getItem('cart'));
-        console.log(dataJson);
         // localStorage.removeItem('cart')
     };
 

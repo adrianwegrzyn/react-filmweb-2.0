@@ -4,7 +4,6 @@ class Box extends Component {
     render() {
         return (
             <div className="container">
-                Hello box
                 {localStorage.getItem("cart")}
             </div>
         );
