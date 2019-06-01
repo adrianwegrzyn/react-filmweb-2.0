@@ -61,3 +61,13 @@ export function getMovies() {
     });
 }
 
+export function getMovie(id) {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + `/movie/show/?id=${id}`,
+        method: 'GET'
+    });
+}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './TourList.scss'
+import './TourList.css'
 import Tour from '../Tour/Tour'
 import {tourData} from '../tourData'
 
@@ -19,11 +19,9 @@ class TourList extends Component {
     };
 
     render() {
-        const { tours } = this.state;
-
         return (
             <section className="tourList">
-                {tours.map(tour => {
+                {this.props.movies.map(tour => {
                     return(
                         <Tour key={tour.id} tour={tour} removeTour={this.removeTour}/>
                     )
