@@ -30,6 +30,7 @@ class Box extends Component {
                 movieId: parseInt(localStorage.getItem("cart").split(";")[i]),
                 numberDay: 7})
             }
+
         let header = {
             movieTimes: order
         };
