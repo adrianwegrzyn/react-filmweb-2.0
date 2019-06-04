@@ -56,6 +56,7 @@ class App extends Component {
 
   handleLogout() {
     localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem("cart");
     this.setState({
       authenticated: false,
       currentUser: null

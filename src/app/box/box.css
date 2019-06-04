@@ -1,0 +1,8 @@
+.imgCart img{
+    height: 160px;
+}
+
+.borderBottom{
+    padding-bottom: 30px;
+    border-bottom: 2px gray solid;
+}

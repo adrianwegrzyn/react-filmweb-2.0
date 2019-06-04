@@ -71,3 +71,22 @@ export function getMovie(id) {
         method: 'GET'
     });
 }
+
+export function addOrder(order) {
+    return request({
+        url: API_BASE_URL + "/order/new",
+        method: 'POST',
+        body: JSON.stringify(order)
+    });
+}
+
+export function getMovieOrder() {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + `/movie/get`,
+        method: 'GET'
+    });
+}

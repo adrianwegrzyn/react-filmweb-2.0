@@ -27,10 +27,10 @@ class Tour extends Component {
                         <i className="fas fa-window-close"/>
                     </span>
                 </div>
-                <div className="tour-info">
-                    <h3>{nameMovie}</h3>
-                    <h4>{year}</h4>
-                    <p>{director}</p>
+                <div className="tour-info mx-auto">
+                    <h3 className="mx-auto">{nameMovie}</h3>
+                    <h4 className="mx-auto">{year}</h4>
+                    <p className="mx-auto">{director}</p>
                 </div>
             </article>
         );

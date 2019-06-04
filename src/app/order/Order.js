@@ -1,34 +1,64 @@
 import React, {Component} from 'react';
-import Alert from "react-s-alert";
-import {Redirect} from "react-router-dom";
+import {getMovieOrder} from "../../util/APIUtils";
+import './order.css'
 
 class VideoList extends Component {
-    componentDidMount() {
-        // If the OAuth2 login encounters an error, the user is redirected to the /login page with an error.
-        // Here we display the error and then remove the error query parameter from the location.
-        if(this.props.location.state && this.props.location.state.error) {
-            setTimeout(() => {
-                Alert.error(this.props.location.state.error, {
-                    timeout: 5000
-                });
-                this.props.history.replace({
-                    pathname: this.props.location.pathname,
-                    state: {}
-                });
-            }, 100);
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            movieOrder: [
+                {
+                    movieId: '',
+                    nameMovie: '',
+                    year: '',
+                    image: '',
+                    director: ''
+                }
+            ],
         }
     }
+
+    componentDidMount() {
+        getMovieOrder()
+            .then(response => {
+                this.setState({
+                    movieOrder: response,
+                    loading: false
+                });
+            }).catch(error => {
+            this.setState({
+                loading: false
+            });
+        });
+    }
+
+
     render() {
-        if(this.props.authenticated) {
-            return <Redirect
-                to={{
-                    pathname: "/product",
-                    state: { from: this.props.location }
-                }}/>;
+        const {movieOrder} = this.state;
+        let row = [];
+
+        for (let i = 0; i < movieOrder.length; i++) {
+            row.push(
+                <div className="row backgroundOrder">
+                    <div className="col">
+                        <img src={movieOrder[i].image} alt=""/>
+                    </div>
+                    <div className="col">
+                        {movieOrder[i].nameMovie}
+                    </div>
+                    <div className="col">
+                        {movieOrder[i].director}
+                    </div>
+                </div>
+            )
         }
+
         return (
-            <div>
-                Hello
+            <div className="container">
+                <h1>Zamówione filmy</h1>
+                {row}
             </div>
         );
     }

@@ -42,17 +42,17 @@ class Movie extends Component {
     saveMovie = (id) => {
         let data = localStorage.getItem('cart');
         let isIn = false;
-        if(data === null){
+        if(data === null || data ===''){
             localStorage.setItem('cart', id);
         }else {
-            let array = localStorage.getItem("cart").split(" ");
+            let array = localStorage.getItem("cart").split(";");
             array.forEach(number => {
                 if(number === id){
                     isIn =  true;
                 }
             });
             if(!isIn){
-                localStorage.setItem('cart', data + ' ' + id);
+                localStorage.setItem('cart', data + ';' + id);
             }
             isIn = false;
         }
@@ -65,12 +65,8 @@ class Movie extends Component {
 
                 <div className="container">
                     <div className="row">
-                        <div className="col-6 justify-content-center imgMovie">
-                            <img src={movie.image} alt=""/>
-                            <Link to={"/"}>
-                            <button className="btn my-3  btn-success" onClick={() => this.saveMovie(this.props.match.params.movieId)}>Dodaj do koszyka</button>
-                            </Link>
-
+                        <div className="col-6 imgMovie ">
+                            <img className="mx-auto" src={movie.image} alt=""/>
                         </div>
 
                         <div className="col-4">
@@ -107,6 +103,9 @@ class Movie extends Component {
                                     {movie.description}
                                 </div>
                             </div>
+                            <Link to={"/"}>
+                                <button className="btn my-5  btn-success" onClick={() => this.saveMovie(this.props.match.params.movieId)}>Dodaj do koszyka</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
